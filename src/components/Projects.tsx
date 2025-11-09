@@ -26,7 +26,7 @@ const personalProjects: PersonalProject[] = [
   {
     id: 1,
     title: 'Pokédex de las Generaciones I a III',
-    description: 'Este fue uno de mis primeros proyectos perosnales, que trata de una Pokédex que abarca las generaciones I a III de Pokémon. Está desarrollado con HTML, CSS y JavaScript, y permite a los usuarios buscar y explorar información sobre los Pokémon de esas generaciones.',
+    description: 'Este fue uno de mis primeros proyectos perosnales, que trata de una Pokédex que abarca las generaciones I a III de Pokémon.',
     image: '/src/assets/Pokedex_I-III.png', // Ruta a la imagen del proyecto
     technologies: ['HTML', 'CSS', 'JAVASCRIPT'],
     liveUrl: 'https://soft-arithmetic-bffdd3.netlify.app/', // URL del proyecto en vivo
@@ -35,12 +35,12 @@ const personalProjects: PersonalProject[] = [
   },
   {
     id: 2,
-    title: 'Proyecto Ejemplo 2',
+    title: 'Estetica de Uñas',
     description: 'Otro proyecto personal que muestra tus habilidades en desarrollo web fullstack.',
-    image: '/project-placeholder.jpg',
+    image: '/src/assets/Estetica.png',
     technologies: ['Java', 'Spring Boot', 'React'],
     liveUrl: 'https://ejemplo2.com',
-    githubUrl: 'https://github.com/usuario/proyecto2',
+    githubUrl: 'https://github.com/Miguel252546/Estetica.git',
   },
   {
     id: 3,
