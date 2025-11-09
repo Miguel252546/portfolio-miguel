@@ -13,9 +13,9 @@ const Hero = () => {
     name: 'Miguel José Zambrano López',
     role: 'Desarrollador Web Fullstack',
     tagline: 'Desarrollador web enfocado en crear soluciones simples y elegantes',
-    email: 'tu-email@ejemplo.com', // Cambiar por el email real
-    linkedin: 'https://www.linkedin.com/in/tu-perfil', // Cambiar por el LinkedIn real
-    github: 'https://github.com/tu-usuario', // Cambiar por el GitHub real
+    email: 'miguelzambrano20144@gmail.com', // Cambiar por el email real
+    linkedin: 'https://www.linkedin.com/in/miguel-zambrano-lopez/', // Cambiar por el LinkedIn real
+    github: 'https://github.com/Miguel252546', // Cambiar por el GitHub real
   }
 
   // Animaciones para los elementos
