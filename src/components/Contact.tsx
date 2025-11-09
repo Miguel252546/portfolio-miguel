@@ -19,15 +19,15 @@ const Contact = () => {
   // Configuración de EmailJS
   // ⚠️ IMPORTANTE: Configurar estos valores después de crear una cuenta en EmailJS
   // Puedes usar variables de entorno o definirlas directamente
-  const EMAILJS_SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID || 'tu_service_id'
+  const EMAILJS_SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID || 'tu_service_id' // 'tu_service_id'
   const EMAILJS_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID || 'tu_template_id'
   const EMAILJS_PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY || 'tu_public_key'
 
   // Información de contacto
   const contactInfo = {
-    email: 'tu-email@ejemplo.com', // Cambiar por el email real
-    linkedin: 'https://www.linkedin.com/in/tu-perfil', // Cambiar por el LinkedIn real
-    github: 'https://github.com/tu-usuario', // Cambiar por el GitHub real
+    email: 'miguelzambrano20144@gmail.com', // Cambiar por el email real
+    linkedin: 'https://www.linkedin.com/in/miguel-zambrano-lopez/', // Cambiar por el LinkedIn real
+    github: 'https://github.com/Miguel252546', // Cambiar por el GitHub real
   }
 
   /**
