@@ -64,6 +64,9 @@ export function getLanguageColor(language: string): string {
     'Node.js': '#339933',
     Express: '#000000',
     'Spring Boot': '#6db33f',
+    MongoDB: '#47a248',
+    PostgreSQL: '#336791',
+    MySQL: '#4479a1',
     Other: '#6b7280',
   }
 

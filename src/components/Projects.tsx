@@ -1,13 +1,13 @@
-import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
-import { FiGithub, FiStar, FiGitBranch } from 'react-icons/fi'
-import { fetchGitHubRepos, getLanguageColor } from '../utils/githubApi'
-import { Project } from '../types/github'
+import { FiGithub, FiExternalLink } from 'react-icons/fi'
+import { PersonalProject } from '../types/projects'
+import { getLanguageColor } from '../utils/githubApi'
 import {
   SiJavascript,
   SiTypescript,
   SiReact,
   SiNodedotjs,
+  SiExpress,
   SiHtml5,
   SiCss3,
   SiGithub,
@@ -17,40 +17,48 @@ import { FaJava } from 'react-icons/fa'
 
 /**
  * Componente Projects
- * Muestra los proyectos del desarrollador obtenidos desde la API de GitHub
+ * Muestra los proyectos personales del desarrollador
  */
+
+// ⚠️ CONFIGURA TUS PROYECTOS AQUÍ
+// Agrega tus proyectos personales con sus imágenes y enlaces
+const personalProjects: PersonalProject[] = [
+  {
+    id: 1,
+    title: 'Proyecto Ejemplo 1',
+    description: 'Descripción breve de tu proyecto. Puedes describir las funcionalidades principales y las tecnologías utilizadas.',
+    image: '/project-placeholder.jpg', // Cambia por la ruta de tu imagen
+    technologies: ['React', 'TypeScript', 'Node.js'],
+    liveUrl: 'https://ejemplo.com', // URL del proyecto en vivo
+    githubUrl: 'https://github.com/usuario/proyecto', // URL del repositorio
+    featured: true,
+  },
+  {
+    id: 2,
+    title: 'Proyecto Ejemplo 2',
+    description: 'Otro proyecto personal que muestra tus habilidades en desarrollo web fullstack.',
+    image: '/project-placeholder.jpg',
+    technologies: ['Java', 'Spring Boot', 'React'],
+    liveUrl: 'https://ejemplo2.com',
+    githubUrl: 'https://github.com/usuario/proyecto2',
+  },
+  {
+    id: 3,
+    title: 'Proyecto Ejemplo 3',
+    description: 'Un tercer proyecto que demuestra tu versatilidad y experiencia en diferentes tecnologías.',
+    image: '/project-placeholder.jpg',
+    technologies: ['Node.js', 'Express', 'MongoDB'],
+    githubUrl: 'https://github.com/usuario/proyecto3',
+  },
+  // Agrega más proyectos aquí...
+]
+
 const Projects = () => {
-  const [projects, setProjects] = useState<Project[]>([])
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState<string | null>(null)
-
-  // Nombre de usuario de GitHub (cambiar por el usuario real)
-  // Puedes usar una variable de entorno o definirla directamente
-  const GITHUB_USERNAME = import.meta.env.VITE_GITHUB_USERNAME || 'tu-usuario-github' // ⚠️ CAMBIAR ESTO
-
-  useEffect(() => {
-    // Obtener proyectos de GitHub al cargar el componente
-    const loadProjects = async () => {
-      try {
-        setLoading(true)
-        const repos = await fetchGitHubRepos(GITHUB_USERNAME)
-        setProjects(repos)
-        setError(null)
-      } catch (err) {
-        setError('No se pudieron cargar los proyectos. Por favor, verifica el nombre de usuario de GitHub.')
-        console.error(err)
-      } finally {
-        setLoading(false)
-      }
-    }
-
-    loadProjects()
-  }, [])
 
   /**
-   * Obtiene el ícono correspondiente al lenguaje del proyecto
+   * Obtiene el ícono correspondiente a una tecnología
    */
-  const getLanguageIcon = (language: string) => {
+  const getTechnologyIcon = (tech: string) => {
     const iconMap: Record<string, React.ComponentType<React.SVGProps<SVGSVGElement> & { className?: string }>> = {
       JavaScript: SiJavascript,
       TypeScript: SiTypescript,
@@ -58,11 +66,20 @@ const Projects = () => {
       'Spring Boot': SiSpringboot,
       React: SiReact,
       'Node.js': SiNodedotjs,
+      Express: SiExpress,
       HTML: SiHtml5,
       CSS: SiCss3,
     }
 
-    return iconMap[language] || SiGithub
+    // Si no hay icono específico, retornar null para que no se muestre el icono
+    return iconMap[tech] || null
+  }
+
+  /**
+   * Obtiene el color asociado a una tecnología
+   */
+  const getTechColor = (tech: string) => {
+    return getLanguageColor(tech)
   }
 
   // Animaciones
@@ -112,117 +129,152 @@ const Projects = () => {
             className="w-24 h-1 bg-primary-600 mx-auto mb-12"
           />
 
-          {/* Estado de carga */}
-          {loading && (
-            <div className="text-center py-12">
-              <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600"></div>
-              <p className="mt-4 text-gray-600 dark:text-gray-400">Cargando proyectos...</p>
-            </div>
-          )}
-
-          {/* Error */}
-          {error && (
-            <div className="text-center py-12">
-              <p className="text-red-600 dark:text-red-400 mb-4">{error}</p>
-              <p className="text-gray-600 dark:text-gray-400 text-sm">
-                Por favor, actualiza la variable GITHUB_USERNAME en el archivo Projects.tsx
-              </p>
-            </div>
-          )}
-
-          {/* Lista de proyectos */}
-          {!loading && !error && projects.length === 0 && (
+          {/* Lista de proyectos personales */}
+          {personalProjects.length === 0 ? (
             <div className="text-center py-12">
               <p className="text-gray-600 dark:text-gray-400">
-                No se encontraron proyectos públicos.
+                No hay proyectos para mostrar. Agrega tus proyectos en el archivo Projects.tsx
               </p>
             </div>
-          )}
-
-          {!loading && !error && projects.length > 0 && (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {projects.map((project) => {
-                const LanguageIcon = getLanguageIcon(project.language)
-                const languageColor = getLanguageColor(project.language)
-
-                return (
-                  <motion.div
-                    key={project.id}
-                    variants={cardVariants}
-                    whileHover={{ y: -5, scale: 1.02 }}
-                    className="bg-white dark:bg-gray-900 rounded-lg shadow-lg hover:shadow-xl transition-shadow overflow-hidden"
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" style={{ gridAutoRows: '1fr' }}>
+              {personalProjects.map((project) => (
+                <motion.div
+                  key={project.id}
+                  variants={cardVariants}
+                  whileHover={{ y: -8, scale: 1.02 }}
+                  className="bg-white dark:bg-gray-900 rounded-lg shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden group flex flex-col h-full"
+                >
+                  {/* Imagen del proyecto - Altura fija */}
+                  <a
+                    href={project.liveUrl || project.githubUrl || '#'}
+                    target={project.liveUrl || project.githubUrl ? '_blank' : undefined}
+                    rel="noopener noreferrer"
+                    className="relative block h-48 bg-gray-200 dark:bg-gray-700 overflow-hidden cursor-pointer flex-shrink-0"
+                    onClick={(e) => {
+                      if (!project.liveUrl && !project.githubUrl) {
+                        e.preventDefault()
+                      }
+                    }}
                   >
-                    {/* Header de la tarjeta */}
-                    <div className="p-6">
-                      {/* Nombre y lenguaje */}
-                      <div className="flex items-center justify-between mb-4">
-                        <h3 className="text-xl font-bold text-gray-900 dark:text-white truncate">
-                          {project.name}
-                        </h3>
-                        {LanguageIcon && (
-                          <LanguageIcon
-                            className="w-6 h-6 flex-shrink-0 ml-2"
-                            style={{ color: languageColor }}
-                          />
-                        )}
+                    {project.image ? (
+                      <img
+                        src={project.image}
+                        alt={project.title}
+                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                        onError={(e) => {
+                          // Si la imagen no se carga, mostrar un placeholder
+                          const target = e.target as HTMLImageElement
+                          target.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23e5e7eb" width="400" height="300"/%3E%3Ctext fill="%239ca3af" font-family="sans-serif" font-size="20" dy="10.5" font-weight="bold" x="50%25" y="50%25" text-anchor="middle"%3EProyecto%3C/text%3E%3C/svg%3E'
+                        }}
+                      />
+                    ) : (
+                      <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-primary-400 to-primary-600">
+                        <SiGithub className="w-16 h-16 text-white opacity-50" />
                       </div>
-
-                      {/* Descripción */}
-                      <p className="text-gray-600 dark:text-gray-400 mb-4 line-clamp-3">
-                        {project.description}
-                      </p>
-
-                      {/* Lenguaje y estadísticas */}
-                      <div className="flex items-center justify-between mb-4">
-                        <div className="flex items-center space-x-4 text-sm text-gray-500 dark:text-gray-400">
-                          <div className="flex items-center">
-                            <span
-                              className="w-3 h-3 rounded-full mr-2"
-                              style={{ backgroundColor: languageColor }}
-                            />
-                            {project.language}
-                          </div>
-                          <div className="flex items-center">
-                            <FiStar className="w-4 h-4 mr-1" />
-                            {project.stars}
-                          </div>
-                          <div className="flex items-center">
-                            <FiGitBranch className="w-4 h-4 mr-1" />
-                            {project.forks}
-                          </div>
-                        </div>
-                      </div>
-
-                      {/* Tags/Topics */}
-                      {project.topics.length > 0 && (
-                        <div className="flex flex-wrap gap-2 mb-4">
-                          {project.topics.slice(0, 3).map((topic) => (
-                            <span
-                              key={topic}
-                              className="px-2 py-1 text-xs bg-primary-100 dark:bg-primary-900 text-primary-800 dark:text-primary-200 rounded"
+                    )}
+                    {/* Overlay al hacer hover */}
+                    <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-40 transition-all duration-300 flex items-center justify-center pointer-events-none">
+                      {(project.liveUrl || project.githubUrl) && (
+                        <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex gap-2 pointer-events-auto">
+                          {project.liveUrl && (
+                            <a
+                              href={project.liveUrl}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="p-3 bg-white rounded-full hover:bg-primary-600 hover:text-white transition-colors shadow-lg"
+                              onClick={(e) => e.stopPropagation()}
                             >
-                              {topic}
-                            </span>
-                          ))}
+                              <FiExternalLink className="w-5 h-5" />
+                            </a>
+                          )}
+                          {project.githubUrl && (
+                            <a
+                              href={project.githubUrl}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="p-3 bg-white rounded-full hover:bg-primary-600 hover:text-white transition-colors shadow-lg"
+                              onClick={(e) => e.stopPropagation()}
+                            >
+                              <FiGithub className="w-5 h-5" />
+                            </a>
+                          )}
                         </div>
                       )}
+                    </div>
+                  </a>
 
-                      {/* Botones de acción */}
-                      <div className="flex space-x-4">
-                        <a
-                          href={project.url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="flex items-center justify-center flex-1 px-4 py-2 bg-primary-600 hover:bg-primary-700 text-white rounded-lg transition-colors"
-                        >
-                          <FiGithub className="w-4 h-4 mr-2" />
-                          Ver código
-                        </a>
+                  {/* Contenido de la tarjeta - Flexbox column con espacio entre elementos */}
+                  <div className="p-6 flex flex-col flex-grow justify-between min-h-0">
+                    {/* Título - Altura fija, siempre en la parte superior */}
+                    <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors line-clamp-1 flex-shrink-0">
+                      {project.title}
+                    </h3>
+
+                    {/* Descripción - Altura fija para mantener alineación */}
+                    <div className="mb-4 flex-shrink-0" style={{ minHeight: '4.5rem' }}>
+                      <p className="text-gray-600 dark:text-gray-400 line-clamp-3">
+                        {project.description}
+                      </p>
+                    </div>
+
+                    {/* Tecnologías - Posición fija, siempre alineadas horizontalmente */}
+                    <div className="mb-4 flex-shrink-0">
+                      <div className="flex flex-wrap gap-2">
+                        {project.technologies.map((tech) => {
+                          const TechIcon = getTechnologyIcon(tech)
+                          const techColor = getTechColor(tech)
+                          return (
+                            <span
+                              key={tech}
+                              className="flex items-center gap-1.5 px-3 py-1.5 text-xs bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-full border border-gray-200 dark:border-gray-700"
+                            >
+                              {TechIcon ? (
+                                <TechIcon
+                                  className="w-4 h-4 flex-shrink-0"
+                                  style={{ color: techColor }}
+                                />
+                              ) : (
+                                <span
+                                  className="w-2 h-2 rounded-full flex-shrink-0"
+                                  style={{ backgroundColor: techColor }}
+                                />
+                              )}
+                              <span>{tech}</span>
+                            </span>
+                          )
+                        })}
                       </div>
                     </div>
-                  </motion.div>
-                )
-              })}
+
+                    {/* Botones - Siempre en la parte inferior, alineados */}
+                    <div className="flex gap-3 flex-shrink-0 mt-auto">
+                      {project.liveUrl && (
+                        <a
+                          href={project.liveUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center justify-center flex-1 px-4 py-2 bg-primary-600 hover:bg-primary-700 text-white rounded-lg transition-colors text-sm font-medium"
+                        >
+                          <FiExternalLink className="w-4 h-4 mr-2" />
+                          Ver proyecto
+                        </a>
+                      )}
+                      {project.githubUrl && (
+                        <a
+                          href={project.githubUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center justify-center flex-1 px-4 py-2 bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 text-gray-900 dark:text-white rounded-lg transition-colors text-sm font-medium"
+                        >
+                          <FiGithub className="w-4 h-4 mr-2" />
+                          Código
+                        </a>
+                      )}
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
             </div>
           )}
         </motion.div>
