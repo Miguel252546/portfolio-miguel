@@ -25,12 +25,12 @@ import { FaJava } from 'react-icons/fa'
 const personalProjects: PersonalProject[] = [
   {
     id: 1,
-    title: 'Proyecto Ejemplo 1',
-    description: 'Descripción breve de tu proyecto. Puedes describir las funcionalidades principales y las tecnologías utilizadas.',
-    image: '/project-placeholder.jpg', // Cambia por la ruta de tu imagen
-    technologies: ['React', 'TypeScript', 'Node.js'],
-    liveUrl: 'https://ejemplo.com', // URL del proyecto en vivo
-    githubUrl: 'https://github.com/usuario/proyecto', // URL del repositorio
+    title: 'Pokédex de las Generaciones I a III',
+    description: 'Este fue uno de mis primeros proyectos perosnales, que trata de una Pokédex que abarca las generaciones I a III de Pokémon. Está desarrollado con HTML, CSS y JavaScript, y permite a los usuarios buscar y explorar información sobre los Pokémon de esas generaciones.',
+    image: '/src/assets/Pokedex_I-III.png', // Ruta a la imagen del proyecto
+    technologies: ['HTML', 'CSS', 'JAVASCRIPT'],
+    liveUrl: 'https://soft-arithmetic-bffdd3.netlify.app/', // URL del proyecto en vivo
+    githubUrl: 'https://github.com/Miguel252546/Pokedex-I---III.git', // URL del repositorio
     featured: true,
   },
   {
