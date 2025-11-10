@@ -14,6 +14,8 @@ import {
   SiSpringboot,
 } from 'react-icons/si'
 import { FaJava } from 'react-icons/fa'
+import PokedexImage from '../assets/Pokedex_I-III.png'
+import Estetica from '../assets/Estetica.png'
 
 /**
  * Componente Projects
@@ -27,7 +29,7 @@ const personalProjects: PersonalProject[] = [
     id: 1,
     title: 'Pokédex de las Generaciones I a III',
     description: 'Este fue uno de mis primeros proyectos perosnales, que trata de una Pokédex que abarca las generaciones I a III de Pokémon.',
-    image: '/src/assets/Pokedex_I-III.png', // Ruta a la imagen del proyecto
+    image: PokedexImage, // Imagen importada para que Vite la procese correctamente
     technologies: ['HTML', 'CSS', 'JAVASCRIPT'],
     liveUrl: 'https://soft-arithmetic-bffdd3.netlify.app/', // URL del proyecto en vivo
     githubUrl: 'https://github.com/Miguel252546/Pokedex-I---III.git', // URL del repositorio
@@ -37,7 +39,7 @@ const personalProjects: PersonalProject[] = [
     id: 2,
     title: 'Estetica de Uñas',
     description: 'Otro proyecto personal donde muestro mis habilidades en desarrollo web fullstack.',
-    image: '/src/assets/Estetica.png',
+    image: Estetica,
     technologies: ['HTML', 'CSS', 'JAVASCRIPT'],
     liveUrl: 'https://regal-empanada-c0e616.netlify.app/',
     githubUrl: 'https://github.com/Miguel252546/Estetica.git',

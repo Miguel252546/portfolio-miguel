@@ -19,9 +19,9 @@ const Contact = () => {
   // Configuración de EmailJS
   // ⚠️ IMPORTANTE: Configurar estos valores después de crear una cuenta en EmailJS
   // Puedes usar variables de entorno o definirlas directamente
-  const EMAILJS_SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID || 'tu_service_id'
-  const EMAILJS_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID || 'tu_template_id'
-  const EMAILJS_PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY || 'tu_public_key'
+  const EMAILJS_SERVICE_ID =  'service_yjkv4ch'; 
+  const EMAILJS_TEMPLATE_ID =  'template_fp2gn3d';
+  const EMAILJS_PUBLIC_KEY =  'Ysrt9swdBGN562gLP';
 
   // Verificar si EmailJS está configurado correctamente
   // Los valores deben existir y no ser los valores por defecto
@@ -31,11 +31,7 @@ const Contact = () => {
     EMAILJS_PUBLIC_KEY &&
     EMAILJS_SERVICE_ID.trim() !== '' &&
     EMAILJS_TEMPLATE_ID.trim() !== '' &&
-    EMAILJS_PUBLIC_KEY.trim() !== '' &&
-    EMAILJS_SERVICE_ID !== 'tu_service_id' &&
-    EMAILJS_TEMPLATE_ID !== 'tu_template_id' &&
-    EMAILJS_PUBLIC_KEY !== 'tu_public_key'
-
+    EMAILJS_PUBLIC_KEY.trim() !== '' 
   // Información de contacto
   const contactInfo = {
     email: 'miguelzambrano20144@gmail.com',
