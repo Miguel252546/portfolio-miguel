@@ -38,9 +38,9 @@ const Contact = () => {
 
   // Información de contacto
   const contactInfo = {
-    email: 'tu-email@ejemplo.com', // Cambiar por el email real
-    linkedin: 'https://www.linkedin.com/in/tu-perfil', // Cambiar por el LinkedIn real
-    github: 'https://github.com/tu-usuario', // Cambiar por el GitHub real
+    email: 'miguelzambrano20144@gmail.com',
+    linkedin: 'https://www.linkedin.com/in/miguel-zambrano-lopez/',
+    github: 'https://github.com/Miguel252546',
   }
 
   /**
