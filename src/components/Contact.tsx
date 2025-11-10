@@ -19,15 +19,28 @@ const Contact = () => {
   // Configuración de EmailJS
   // ⚠️ IMPORTANTE: Configurar estos valores después de crear una cuenta en EmailJS
   // Puedes usar variables de entorno o definirlas directamente
-  const EMAILJS_SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID || 'tu_service_id' // 'tu_service_id'
+  const EMAILJS_SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID || 'tu_service_id'
   const EMAILJS_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID || 'tu_template_id'
   const EMAILJS_PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY || 'tu_public_key'
 
+  // Verificar si EmailJS está configurado correctamente
+  // Los valores deben existir y no ser los valores por defecto
+  const isEmailJSConfigured = 
+    EMAILJS_SERVICE_ID && 
+    EMAILJS_TEMPLATE_ID && 
+    EMAILJS_PUBLIC_KEY &&
+    EMAILJS_SERVICE_ID.trim() !== '' &&
+    EMAILJS_TEMPLATE_ID.trim() !== '' &&
+    EMAILJS_PUBLIC_KEY.trim() !== '' &&
+    EMAILJS_SERVICE_ID !== 'tu_service_id' &&
+    EMAILJS_TEMPLATE_ID !== 'tu_template_id' &&
+    EMAILJS_PUBLIC_KEY !== 'tu_public_key'
+
   // Información de contacto
   const contactInfo = {
-    email: 'miguelzambrano20144@gmail.com', // Cambiar por el email real
-    linkedin: 'https://www.linkedin.com/in/miguel-zambrano-lopez/', // Cambiar por el LinkedIn real
-    github: 'https://github.com/Miguel252546', // Cambiar por el GitHub real
+    email: 'tu-email@ejemplo.com', // Cambiar por el email real
+    linkedin: 'https://www.linkedin.com/in/tu-perfil', // Cambiar por el LinkedIn real
+    github: 'https://github.com/tu-usuario', // Cambiar por el GitHub real
   }
 
   /**
@@ -53,38 +66,52 @@ const Contact = () => {
 
     try {
       // Verificar que las credenciales de EmailJS estén configuradas
-      if (
-        EMAILJS_SERVICE_ID === 'tu_service_id' ||
-        EMAILJS_TEMPLATE_ID === 'tu_template_id' ||
-        EMAILJS_PUBLIC_KEY === 'tu_public_key'
-      ) {
+      if (!isEmailJSConfigured) {
         // Simulación de envío si EmailJS no está configurado
-        console.log('Formulario de contacto:', formData)
         await new Promise((resolve) => setTimeout(resolve, 1000))
         setSubmitStatus('success')
         setFormData({ name: '', email: '', message: '' })
         alert(
           'Mensaje enviado (simulación). Por favor, configura EmailJS para habilitar el envío real.'
         )
-      } else {
-        // Envío real con EmailJS
-        await emailjs.send(
-          EMAILJS_SERVICE_ID,
-          EMAILJS_TEMPLATE_ID,
-          {
-            from_name: formData.name,
-            from_email: formData.email,
-            message: formData.message,
-          },
-          EMAILJS_PUBLIC_KEY
-        )
-
-        setSubmitStatus('success')
-        setFormData({ name: '', email: '', message: '' })
+        return
       }
-    } catch (error) {
-      console.error('Error al enviar el formulario:', error)
+
+      // Envío real con EmailJS
+      const templateParams = {
+        from_name: formData.name,
+        from_email: formData.email,
+        message: formData.message,
+        to_name: 'Miguel Zambrano', // Nombre del destinatario
+        reply_to: formData.email,
+      }
+
+      await emailjs.send(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
+        templateParams,
+        EMAILJS_PUBLIC_KEY
+      )
+      setSubmitStatus('success')
+      setFormData({ name: '', email: '', message: '' })
+    } catch (error: any) {
+      // Solo loguear errores en desarrollo para debugging
+      if (import.meta.env.DEV) {
+        console.error('Error al enviar el formulario:', error)
+      }
+      
       setSubmitStatus('error')
+      
+      // Mostrar mensaje de error al usuario
+      const errorMessage = error?.text || error?.message || 'Error desconocido'
+      
+      // Solo mostrar alert con detalles en desarrollo
+      if (import.meta.env.DEV) {
+        alert(
+          `Error al enviar el mensaje: ${errorMessage}\n\n` +
+          `Asegúrate de que la configuración de EmailJS sea correcta.`
+        )
+      }
     } finally {
       setIsSubmitting(false)
     }
@@ -290,4 +317,3 @@ const Contact = () => {
 }
 
 export default Contact
-
