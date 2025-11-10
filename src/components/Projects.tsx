@@ -36,10 +36,10 @@ const personalProjects: PersonalProject[] = [
   {
     id: 2,
     title: 'Estetica de Uñas',
-    description: 'Otro proyecto personal que muestra tus habilidades en desarrollo web fullstack.',
+    description: 'Otro proyecto personal donde muestro mis habilidades en desarrollo web fullstack.',
     image: '/src/assets/Estetica.png',
-    technologies: ['Java', 'Spring Boot', 'React'],
-    liveUrl: 'https://ejemplo2.com',
+    technologies: ['HTML', 'CSS', 'JAVASCRIPT'],
+    liveUrl: 'https://regal-empanada-c0e616.netlify.app/',
     githubUrl: 'https://github.com/Miguel252546/Estetica.git',
   },
   {
