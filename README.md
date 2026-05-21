@@ -2,7 +2,7 @@
 
 Portafolio web personal moderno y responsivo desarrollado con React, TypeScript, Vite y TailwindCSS. Este proyecto muestra mis proyectos, experiencia y tecnologías que domino como Desarrollador Web Fullstack.
 
-## ✨ Características
+## ✨ Características T_T
 
 - 🎨 **Diseño moderno y minimalista** con TailwindCSS
 - 🌓 **Modo oscuro/claro** con toggle para cambiar entre temas
