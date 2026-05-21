@@ -29,7 +29,7 @@ const personalProjects: PersonalProject[] = [
     id: 1,
     title: 'Pokédex de las Generaciones I a III',
     description: 'Este fue uno de mis primeros proyectos perosnales, que trata de una Pokédex que abarca las generaciones I a III de Pokémon.',
-    image: PokedexImage, // Imagen importada para que Vite la procese correctamente
+    image: '/src/assets/Pokedex_I-III.png', // Ruta a la imagen del proyecto
     technologies: ['HTML', 'CSS', 'JAVASCRIPT'],
     liveUrl: 'https://soft-arithmetic-bffdd3.netlify.app/', // URL del proyecto en vivo
     githubUrl: 'https://github.com/Miguel252546/Pokedex-I---III.git', // URL del repositorio
@@ -39,18 +39,28 @@ const personalProjects: PersonalProject[] = [
     id: 2,
     title: 'Estetica de Uñas',
     description: 'Otro proyecto personal donde muestro mis habilidades en desarrollo web fullstack.',
-    image: Estetica,
+    image: '/src/assets/Estetica.png',
     technologies: ['HTML', 'CSS', 'JAVASCRIPT'],
-    liveUrl: 'https://regal-empanada-c0e616.netlify.app/',
+    liveUrl: 'https://belleza-glamur-a-lo-caribeo.netlify.app/',
     githubUrl: 'https://github.com/Miguel252546/Estetica.git',
   },
   {
     id: 3,
-    title: 'Proyecto Ejemplo 3',
-    description: 'Un tercer proyecto que demuestra tu versatilidad y experiencia en diferentes tecnologías.',
-    image: '/project-placeholder.jpg',
-    technologies: ['Node.js', 'Express', 'MongoDB'],
+    title: 'ChatBot Educativo',
+    description: 'ChatBot educativo desarrollado con Node.js, para ayudar a conocer ciertos elementos ya sea la hora de algunos paises, algunas recetas, y chistes malos, entre otras cosas. Publicado y subido en Render por el uso de Node.js',
+    image: '/src/assets/bot.png',
+    technologies: ['Node.js'],
+    liveUrl: 'https://chat-bot-educactivo.onrender.com/',
     githubUrl: 'https://github.com/usuario/proyecto3',
+  },
+  {
+    id: 4,
+    title: 'Invitacion Boda "Hermana y Pupi (Cuña)"',
+    description: 'ChatBot educativo desarrollado con Node.js, para ayudar a conocer ciertos elementos ya sea la hora de algunos paises, algunas recetas, y chistes malos, entre otras cosas. Publicado y subido en Render por el uso de Node.js',
+    image: '/src/assets/boda.png',
+    technologies: ['HTML', 'CSS', 'JAVASCRIPT'],
+    liveUrl: 'https://transcendent-kulfi-32b339.netlify.app/',
+    githubUrl: '',
   },
   // Agrega más proyectos aquí...
 ]
