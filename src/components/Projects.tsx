@@ -14,6 +14,8 @@ import {
   SiSpringboot,
 } from 'react-icons/si'
 import { FaJava } from 'react-icons/fa'
+import PokedexImage from '../assets/Pokedex_I-III.png'
+import Estetica from '../assets/Estetica.png'
 
 /**
  * Componente Projects
